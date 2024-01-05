@@ -1,0 +1,32 @@
+---
+- name: Test File
+  hosts: all
+  become: yes
+  vars_prompt:
+    - name: password
+      prompt: "Enter a password of mysql"
+
+  tasks:
+     - name: fetch file
+       ansible.builtin.template:
+          src: /home/emmi/app/sql_health/db.j2
+          dest: /home/emmanuel/db.sh
+
+
+     - name: execute sh File
+       command: sh /home/emmanuel/db.sh
+
+     - name: change file
+       command: mv /home/emmanuel/dbSH.txt /home/emmanuel/{{inventory_hostname}}.txt
+
+#     - name: fetch file
+#       fetch:
+#          src: /home/emmanuel/{{inventory_hostname}}.txt
+#          dest: /home/
+#          flat: yes
+
+     - name: remove file
+       file:
+         path: /home/emmanuel/db.sh
+         state: absent
+
