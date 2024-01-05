@@ -2,9 +2,11 @@
 - name: Test File
   hosts: all
   become: yes
-  vars_prompt:
-    - name: password
-      prompt: "Enter a password of mysql"
+  vars:
+     password: Pass@321
+  #vars_prompt:
+  #  - name: password
+  #    prompt: "Enter a password of mysql"
 
   tasks:
      - name: fetch file
